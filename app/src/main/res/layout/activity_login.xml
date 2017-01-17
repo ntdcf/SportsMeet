@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:padding="0dp"
+    tools:context="com.luohao.sportmeet.LoginActivity">
+
+    <TextView
+        android:id="@+id/TextLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/LoginBlack"
+        android:textColor="@color/white"
+        android:padding="30dp"
+        android:textSize="35dp"
+        android:text="用户登录"/>
+   <EditText
+       android:id="@+id/username_edit"
+       android:padding="15dp"
+       android:textSize="20dp"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@id/TextLogin"
+       android:maxLines="1"
+       android:hint="用户名(学号)"/>
+    <EditText
+        android:id="@+id/password_edit"
+        android:padding="15dp"
+        android:textSize="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/username_edit"
+        android:maxLines="1"
+        android:hint="密码"/>
+
+
+
+</RelativeLayout>
