@@ -17,9 +17,18 @@
         android:layout_height="wrap_content"
         android:background="@color/LoginBlack"
         android:textColor="@color/white"
-        android:padding="30dp"
+        android:padding="25dp"
         android:textSize="35dp"
         android:text="用户登录"/>
+
+    <ImageView
+        android:id="@+id/sport_ioc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:padding="15dp"
+        android:layout_below="@id/TextLogin"
+        android:src="@mipmap/sportmeet"/>
 
     <Button
         android:id="@+id/reg_button"
@@ -33,18 +42,18 @@
 
    <EditText
        android:id="@+id/username_edit"
-       android:padding="15dp"
+       android:padding="10dp"
        android:layout_margin="15dp"
        android:textSize="20dp"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-       android:layout_below="@id/reg_button"
+       android:layout_below="@id/sport_ioc"
        android:backgroundTint="@color/colorPrimary"
        android:maxLines="1"
        android:hint="用户名(学号)"/>
     <EditText
         android:id="@+id/password_edit"
-        android:padding="15dp"
+        android:padding="10dp"
         android:textSize="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
