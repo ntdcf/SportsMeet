@@ -1,31 +1,72 @@
 package com.luohao.sportmeet;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
 
-public class LoginActivity extends Activity {
-    private Button button;
+
+import com.luohao.sportmeet.API.LinkServer;
+import com.luohao.sportmeet.Service.LoginService;
+
+public class LoginActivity extends Activity implements OnClickListener {
+    private Intent intent;      //切换任务
+
+    private Button LoginButton;     //登录按钮
+    private Button RegButton;       //注册按钮
+    private Button ForgetPasswdButton;      //忘记密码按钮
+
+    private EditText username;      //用户名
+    private EditText password;      //密码
+
+    private LinkServer linkServer;
+
+    private LoginService loginService = new LoginService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
-        button = (Button) findViewById(R.id.password_forget);
-        button.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(LoginActivity.this, "aaaaaaaaa", Toast.LENGTH_SHORT).show();
-            }
-        });
 
+//        按钮点击
+        LoginButton = (Button) findViewById(R.id.login_button);
+        RegButton = (Button) findViewById(R.id.reg_button);
+        ForgetPasswdButton = (Button) findViewById(R.id.password_forget);
 
-//        getSupportActionBar().hide();;
+        username = (EditText) findViewById(R.id.username_edit);
+        password = (EditText) findViewById(R.id.password_edit);
+
+        RegButton.setOnClickListener(this);
+        LoginButton.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.reg_button:
+                intent = new Intent(LoginActivity.this, RegActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.login_button:
+                linkServer = new LinkServer();      //HTTP请求的内容
+                System.out.println(getLoginData());
+//                linkServer.setHTTPData(getLoginData());     //创建一条线程，用于访问后台数据
+                linkServer.start();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private String getLoginData() {
+        String data = "username="+username.getText().toString()+"&password="+password.getText().toString();
+        return data;
     }
 }

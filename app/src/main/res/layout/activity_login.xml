@@ -49,6 +49,7 @@
        android:layout_height="wrap_content"
        android:layout_below="@id/sport_ioc"
        android:backgroundTint="@color/colorPrimary"
+       android:inputType="number"
        android:maxLines="1"
        android:hint="用户名(学号)"/>
     <EditText
@@ -61,6 +62,7 @@
         android:layout_below="@id/username_edit"
         android:backgroundTint="@color/colorPrimary"
         android:maxLines="1"
+        android:inputType="textPassword"
         android:hint="密码"/>
     <Button
         android:id="@+id/password_forget"
@@ -72,8 +74,6 @@
         android:textSize="17dp"
         android:padding="10dp"
         android:text="忘记密码？"/>
-
-
 
     <Button
         android:id="@+id/login_button"
