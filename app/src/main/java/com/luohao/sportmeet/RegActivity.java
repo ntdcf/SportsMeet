@@ -2,6 +2,7 @@ package com.luohao.sportmeet;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -9,7 +10,11 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 
+import com.luohao.sportmeet.API.LinkServer;
 import com.luohao.sportmeet.Service.UserService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class RegActivity extends Activity implements View.OnClickListener {
     private Button ExitButton;
@@ -19,8 +24,7 @@ public class RegActivity extends Activity implements View.OnClickListener {
     private EditText password1;
     private EditText password2;
 
-    private Switch type;
-
+    private LinkServer linkServer;
     UserService userService = new UserService();
 
     @Override
@@ -38,8 +42,6 @@ public class RegActivity extends Activity implements View.OnClickListener {
         password1 = (EditText) findViewById(R.id.input_password);
         password2 = (EditText) findViewById(R.id.enter_password);
 
-        //用户类型
-        type = (Switch) findViewById(R.id.class_teach);
 
         RegButton.setOnClickListener(this);
         ExitButton.setOnClickListener(this);
@@ -49,21 +51,41 @@ public class RegActivity extends Activity implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //点击取消按钮，退出这个活动
             case R.id.exit_button:
                 finish();
                 break;
+            //点击注册按钮将
             case R.id.enter_reg_button:
+                String pswd1 = password1.getText().toString();
+                String pswd2 = password2.getText().toString();
                 if (!username.getText().toString().equals("")) {
-//                    if (userService.enterPassword(password1.getText().toString(), password2.getText().toString())) {
-//                        type.setOnClickListener(new CompoundButton.OnCheckedChangeListener() {
-//                            @Override
-//                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                                System.out.println(isChecked);
-//                            }
-//                        });
-//                    }
+                    if ((!pswd1.equals("")) || (!pswd2.equals(""))) {
+                        if(pswd1.equals(pswd2)) {
+                            linkServer = new LinkServer();
+                            Log.d("json", getRegData());
+                            linkServer.setHTTPData(getRegData());
+                            linkServer.setHttpURL(AppsData.RegServerURL);
+                            linkServer.start();
+                        } else {
+                            System.out.println("eeederrr");
+                        }
+                    }
+                } else {
+
                 }
                 break;
         }
+    }
+
+    private String getRegData() {
+        JSONObject RegInfo = new JSONObject();
+        try {
+            RegInfo.put("username", username.getText().toString());
+            RegInfo.put("password", password1.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return RegInfo.toString();
     }
 }

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +20,13 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.luohao.sportmeet.API.LinkServer;
+import com.luohao.sportmeet.Service.LoginService;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -26,23 +34,57 @@ public class MainActivity extends AppCompatActivity
     private ViewPager viewPager;
     private ImageView imageView;
 
+
+    private TextView usernameText;
+    private TextView passwordText;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 //        setContentView(R.layout.activity_login);
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
 
-//        imageView = (ImageView) findViewById(R.id.index_image);
-//        imageView.setImageResource(R.drawable.test);
+        LinkServer linkServer = new LinkServer();
+        linkServer.setHttpURL(AppsData.SessionURL);
+        linkServer.setHTTPData("");
+        linkServer.start();
+        try {
+            //没办法，不然子线程会执行顺序不定，只能让主线程等待一下
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        int flag = 104;
+        try {
+            JSONObject sessionJson = new JSONObject(linkServer.returnData);
+            flag = sessionJson.getInt("num");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        Log.d("session num", String.valueOf(flag));
+        if (flag == 104) {
+            String aaa = this.getString(R.string.username_nav);
+
+
+
+//            String usernname2 = String.format(username, "用户未登录");
+
+//            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+//            startActivity(intent);
+        }
+
+//        String aaa = this.getString(R.string.username_nav);
+//        String.format(aaa,"aaaa");
         //在手机页面中嵌入Web页面
         webView = (WebView) findViewById(R.id.main_web_view);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setUseWideViewPort(true);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("file:///android_asset/login.html");
+        webView.loadUrl("file:///android_asset/index.html");
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

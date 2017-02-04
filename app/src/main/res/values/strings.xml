@@ -5,4 +5,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="username_nav">姓名: %1$s</string>
+    <string name="password_nav"></string>
 </resources>

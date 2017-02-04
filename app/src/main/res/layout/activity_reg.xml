@@ -59,16 +59,7 @@
         android:inputType="textPassword"
         android:maxLines="1"
         android:hint="再次输入密码"/>
-    <Switch
-        android:id="@+id/class_teach"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="30dp"
-        android:textSize="20dp"
-        android:layout_below="@id/enter_password"
-        android:textOff="0"
-        android:textOn="1"
-        android:text="教师(需上级审核)"/>
+
 
     <Button
         android:id="@+id/exit_button"
@@ -94,8 +85,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="14dp"
-        android:layout_below="@+id/class_teach"
-        android:layout_toStartOf="@+id/exit_button"
+        android:layout_below="@id/enter_password"
+        android:layout_toStartOf="@id/exit_button"
         android:layout_marginEnd="63dp" />
 
 </RelativeLayout>

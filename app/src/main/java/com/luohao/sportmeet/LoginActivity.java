@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
@@ -14,6 +15,10 @@ import android.widget.EditText;
 
 import com.luohao.sportmeet.API.LinkServer;
 import com.luohao.sportmeet.Service.LoginService;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class LoginActivity extends Activity implements OnClickListener {
     private Intent intent;      //切换任务
@@ -50,15 +55,18 @@ public class LoginActivity extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            //点击注册按钮
             case R.id.reg_button:
                 intent = new Intent(LoginActivity.this, RegActivity.class);
                 startActivity(intent);
                 break;
+            //点击登录按钮
             case R.id.login_button:
                 linkServer = new LinkServer();      //HTTP请求的内容
-                System.out.println(getLoginData());
-//                linkServer.setHTTPData(getLoginData());     //创建一条线程，用于访问后台数据
-                linkServer.start();
+                Log.d("json",getLoginData());
+                linkServer.setHTTPData(getLoginData());
+                linkServer.setHttpURL(AppsData.LoginServerURL);
+                linkServer.start();     //创建一条线程，用于访问后台数据
                 break;
             default:
                 break;
@@ -66,7 +74,13 @@ public class LoginActivity extends Activity implements OnClickListener {
     }
 
     private String getLoginData() {
-        String data = "username="+username.getText().toString()+"&password="+password.getText().toString();
-        return data;
+        JSONObject LoginInfo = new JSONObject();
+        try {
+            LoginInfo.put("username", username.getText().toString());
+            LoginInfo.put("password", password.getText().toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return LoginInfo.toString();
     }
 }
