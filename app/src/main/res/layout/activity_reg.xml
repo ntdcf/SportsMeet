@@ -9,16 +9,16 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.luohao.sportmeet.RegActivity">
+    tools:context="com.luohao.sportsmeet.activity.RegActivity">
 
     <TextView
         android:id="@+id/TextReg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/LoginBlack"
-        android:textColor="@color/white"
         android:padding="25dp"
         android:textSize="35dp"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#FFF"
         android:text="用户注册"/>
 
 

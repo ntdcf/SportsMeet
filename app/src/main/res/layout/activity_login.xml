@@ -9,16 +9,16 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:padding="0dp"
-    tools:context="com.luohao.sportmeet.LoginActivity">
+    tools:context="com.luohao.sportsmeet.activity.LoginActivity">
 
     <TextView
         android:id="@+id/TextLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/LoginBlack"
-        android:textColor="@color/white"
         android:padding="25dp"
         android:textSize="35dp"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="#FFF"
         android:text="用户登录"/>
 
     <ImageView
@@ -27,8 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="15dp"
-        android:layout_below="@id/TextLogin"
-        android:src="@mipmap/sportmeet"/>
+        android:layout_below="@id/TextLogin" />
 
     <Button
         android:id="@+id/reg_button"
@@ -83,7 +82,7 @@
         android:layout_margin="15dp"
         android:background="@color/colorPrimary"
         android:textSize="18dp"
-        android:textColor="@color/white"
+        android:textColor="#FFF"
         android:text="登录"/>
 
 
